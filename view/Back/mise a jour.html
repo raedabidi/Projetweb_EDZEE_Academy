@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+     <script src ="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> 
+     <script src="Controle.js"></script>
+    <title>Products</title>
+</head>
+    <body>
+    <style>
+  .error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+  }
+     </style>
+        <div class="container my-5" >
+        <center><h1>Update Products</h1></center>
+        
+        <hr>
+		<br>
+		<br>
+    	
+		<?php
+			if (isset($_GET['idProduit'])){
+				$products = $ProductC->RecupererProduct($_GET['idProduit']);
+				
+		?>
+    
+        <form method="post" class="form"  id="form" onsubmit="return validateForm();" >
+            <!--------------------------------------------Nom------------------------------------------------->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label "  >Product_name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Product_name" id="Product_name" value="<?php echo $products['Product_name'];?>">
+                </div>
+            </div>
+            <!---------------------------------------------desc---------------------------------------------->
+            <div class="row mb-3">
+            <label class="col-sm-3 col-form-label "  >Description</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Descriptionn" id="Descriptionn" value="<?php echo $products['Descriptionn']; ?>">
+                </div>
+            </div>
+
+            <!---------------------------------------------price---------------------------------------------->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label " >Product_price</label>
+                      <div class="col-sm-6">
+                    <input type="number" class="form-control" name="Product_price"  id="Product_price" value="<?php echo $products['Product_price']; ?>">
+                      </div>
+                </div>
+                <!---------------------------------------------availabilty---------------------------------------------->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label " >Availability</label>
+                      <div class="col-sm-6">
+                    <input type="text" class="form-control" name="Availabilityy"  id="Availabilityy" value="<?php echo $products['Availabilityy']; ?>">
+                      </div>
+                </div>
+                <!---------------------------------------------img---------------------------------------------->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label " >Product_img</label>
+                      <div class="col-sm-6">
+                    <input type="file" class="form-control" name="img"  id="img" value="<?php echo $products['img']; ?>">
+                      </div>
+                </div>
+             <!---------------------------------------------Buttons---------------------------------------------->
+             <div class="row mb-5">
+             <div class="offset-sm-3 col-sm-3 d-grid">
+                <button type="submit" class="btn btn-primary">Update</button>
+             </div>
+             <div class="col-sm-3 d-grid">
+                 <a class="btn btn-primary" href="AfficherProducts.php" role="button">Cancel</a>
+             </div>
+          </div>
+            </table>
+        </form>
+        </div>
+        <?php
+            }
+		?>
+    </body>
+</html>
