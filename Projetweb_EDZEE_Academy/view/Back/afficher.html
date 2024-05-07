@@ -1,0 +1,143 @@
+<?php
+	include '../Controller/FormationC.php';
+
+ 
+	$ProductC=new FormationC();
+
+
+	$listeFormation=$FormationC->AfficherFormations(); 
+   
+?>
+<html>
+	<head>
+	<title>Formation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+	<link rel="stylesheet" href="../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+
+
+
+
+	</head>
+	<body>
+
+			
+		<div class="container my-5">
+		<center><h1>List of Product</h1></center>
+           
+
+		<hr>
+		<br>
+		<?php
+           if(isset($_GET['successMessage'])){
+            $successMessage = $_GET['successMessage'];
+              
+            echo "<div class='alert alert-success alert-dismissible fade show' rol e='alert'>
+            '$successMessage'
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+          </div>"; 
+           }
+
+		   if(isset($_GET['message'])){
+            $message = $_GET['message'];
+              
+            echo "<div class='alert alert-warning alert-dismissible fade show' rol e='alert'>
+            '$message'
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+          </div>"; 
+           }
+
+		   if(isset($_GET['mess'])){
+            $mess = $_GET['mess'];
+              
+            echo "<div class='alert alert-warning alert-dismissible fade show' rol e='alert'>
+            '$mess'
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+          </div>"; 
+           }
+
+          ?>
+
+   
+
+			<div class="row">
+			<div class="col-md-8">
+				
+				<a class="btn btn-primary" href="AjouterProduct.php" role="button">New Product</a>
+                    <br>
+                        
+			 </div>
+
+		</div>
+		<br>
+
+		<!----
+		<div class="dropdown">
+  		<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    		Trier par
+  		</button>
+  		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    		<a class="dropdown-item" href="?sort=nom">Nom</a>
+    		<a class="dropdown-item" href="?sort=date">Date de naissance</a>
+  		</div>
+			</div>
+		-->
+
+
+	
+		<table  id="tableP" class="table">
+		   <thead>
+			<tr>
+				<th>id Product</th> 
+				<th>Product Name</th>	
+				<th>Description</th>
+				<th>Product Price</th>
+				<th>Availability</th>
+				<th>Product_img</th>
+				<th>Creation date</th>
+				<th>View</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+			</thead>
+			<?php
+		
+				foreach($listeProducts as $product){
+			?>
+			<tr>
+				<td><?php echo $product['idProduit']; ?></td>
+				<td><?php echo $product['Product_name']; ?></td>
+				<td><?php echo $product['Descriptionn']; ?></td>
+				<td><?php echo $product['Product_price']; ?></td>
+				<td><?php echo $product['Availabilityy']; ?></td>
+				<td><img style="max-width: 10%;max-height=10%" src="./image/<?php echo $product['img']; ?>"></td>
+				<td><?php echo $product['creationDate']; ?></td>
+				<td>
+					<form method="GET" action="ViewProduct.php">
+						<input type="submit"  class="btn btn-info btn-sm" name="Voir" value="Voir">
+						<input type="hidden"  value=<?php echo $product['idProduit']; ?>  name="idProduit">  
+					</form>
+				</td>
+				<td>
+					<form method="GET" action="ModifierProduct.php">
+						<input type="submit"  class="btn btn-success btn-sm" name="Update" value="Update">
+						<input type="hidden"  value=<?php echo $product['idProduit']; ?>  name="idProduit">  
+					</form>
+				</td>
+				<td>
+					<a  class="btn btn-danger btn-sm"   href="SupprimerProduct.php?idProduit=<?php echo $product['idProduit']; ?>">Delete</a>
+				</td>
+			</tr>
+			<?php
+				}
+			?>
+		</table>             
+		</div>
+	</body>
+</html>
