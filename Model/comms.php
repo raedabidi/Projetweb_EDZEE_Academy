@@ -7,14 +7,16 @@ class comms
     private ?string $titre_commentaire = null;
     private ?string $date_commentaire = null;
     private ?string $commentaire = null;
+    private ?int $like_dislike = null;
 
-    public function __construct($i, $f_i, $b, $a, $m)
+    public function __construct($i, $f_i, $b, $a, $m, $ld)
     {
         $this->id_commentaire = $i;
         $this->id_forum = $f_i;
         $this->titre_commentaire = $b;
         $this->date_commentaire = $a;
         $this->commentaire = $m;
+        $this->like_dislike = $ld;
     }
 
     public function getid_commentaire()
@@ -69,6 +71,17 @@ class comms
     public function setcommentaire($commentaire)
     {
         $this->commentaire = $commentaire;
+        return $this;
+    }
+
+    public function getlike_dislike()
+    {
+        return $this->like_dislike;
+    }
+
+    public function setlike_dislike($like_dislike)
+    {
+        $this->like_dislike = $like_dislike;
         return $this;
     }
 }

@@ -133,6 +133,57 @@ class CommsC
         }
     }
 
+    // Méthode pour ajouter un like à un commentaire
+    function addLike($id_commentaire)
+    {
+        $sql = "UPDATE comms SET like_dislike = like_dislike + 1 WHERE id_commentaire = :id_commentaire";
+        $db = config::getConnexion();
+        $req = $db->prepare($sql);
+        $req->bindValue(':id_commentaire', $id_commentaire);
+
+        try {
+            $req->execute();
+            // Retourner le nombre total de likes/dislikes après l'ajout
+            echo $this->getLikeDislikeCount($id_commentaire);
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
+
+    // Méthode pour ajouter un dislike à un commentaire
+    function addDislike($id_commentaire)
+    {
+        $sql = "UPDATE comms SET like_dislike = like_dislike - 1 WHERE id_commentaire = :id_commentaire";
+        $db = config::getConnexion();
+        $req = $db->prepare($sql);
+        $req->bindValue(':id_commentaire', $id_commentaire);
+
+        try {
+            $req->execute();
+            // Retourner le nombre total de likes/dislikes après l'ajout
+            echo $this->getLikeDislikeCount($id_commentaire);
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
+
+    // Méthode pour obtenir le nombre total de likes/dislikes pour un commentaire
+    function getLikeDislikeCount($id_commentaire)
+    {
+        $sql = "SELECT like_dislike FROM comms WHERE id_commentaire = :id_commentaire";
+        $db = config::getConnexion();
+        $req = $db->prepare($sql);
+        $req->bindValue(':id_commentaire', $id_commentaire);
+
+        try {
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+            return $result['like_dislike'];
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
+
 }
 
 ?>

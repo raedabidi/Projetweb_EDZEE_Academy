@@ -131,6 +131,8 @@ if (isset($_POST['export_pdf'])) {
                             <th>Date Commentaire</th>
                             <th>Titre Commentaire</th>
                             <th>Contenu Commentaire</th>
+                            <th>Like</th>
+                            <th>Dislike</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -142,6 +144,20 @@ if (isset($_POST['export_pdf'])) {
                                 <td><?= $comment['date_commentaire']; ?></td>
                                 <td><?= $comment['titre_commentaire']; ?></td>
                                 <td><?= $comment['commentaire']; ?></td>
+                                <td>
+                                    <?= $comment['like_dislike']; ?>
+                                    <form method="POST" action="like.php">
+                                        <input type="hidden" name="comment_id" value="<?= $comment['id_commentaire']; ?>">
+                                        <button type="submit">Like</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <?= $comment['like_dislike']; ?>
+                                    <form method="POST" action="dislike.php">
+                                        <input type="hidden" name="comment_id" value="<?= $comment['id_commentaire']; ?>">
+                                        <button type="submit">Dislike</button>
+                                    </form>
+                                </td>
                                 <td align="center">
                                     <form method="POST" action="modifiercomms.php">
                                         <input type="submit" name="update" value="Modifier">

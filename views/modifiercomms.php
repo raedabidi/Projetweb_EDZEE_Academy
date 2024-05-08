@@ -25,9 +25,10 @@ if (
         // Obtenir la date actuelle
         $date_commentaire = date("Y-m-d H:i:s"); // Format: Année-Mois-Jour Heure:Minute:Seconde
         $commentaire = $_POST['commentaire'];
+        $like_dislike = false; // Valeur par défaut pour like_dislike
 
-        // Créer un nouvel objet comms
-        $comms = new comms($id_commentaire, $id_forum, $titre_commentaire, $date_commentaire, $commentaire);
+        // Créer un nouvel objet comms avec tous les attributs, y compris like_dislike
+        $comms = new comms($id_commentaire, $id_forum, $titre_commentaire, $date_commentaire, $commentaire, $like_dislike);
 
         // Mettre à jour l'enregistrement en utilisant la méthode CommsC
         $commsC->updateComment($comms, $id_commentaire);

@@ -23,13 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Récupérer l'ID du forum à partir des données du formulaire
         $id_forum = intval($_POST['id_forum']); // Convertir en entier
 
-        // Créer un nouvel objet comms
+        // Créer un nouvel objet comms avec like_dislike initialisé à false
         $comms = new comms(
             null, // L'ID sera auto-incrémenté, donc laisser null
             $id_forum, // ID du forum
             $_POST['titre_commentaire'], // Titre du commentaire
             $date_commentaire, // Date du commentaire
-            $_POST['commentaire'] // Contenu du commentaire
+            $_POST['commentaire'], // Contenu du commentaire
+            false // Valeur initiale pour like_dislike, par exemple false pour "pas de like/dislike"
         );
 
         // Ajouter le commentaire
@@ -38,9 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header('Location: listcomms.php');
             exit(); // Assurez-vous de sortir du script après la redirection
         } else {
+            // S'il y a une erreur dans l'ajout du commentaire
             $error = "Une erreur s'est produite lors de l'ajout du commentaire.";
         }
     } else {
+        // Si tous les champs requis ne sont pas remplis
         $error = "Tous les champs doivent être remplis.";
     }
 }
@@ -54,15 +57,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Ajouter un commentaire</title>
     <link rel="stylesheet" href="style.css">
     <script>
+        // Importez les dépendances
+        const Filter = require("bad-words");
+
+        // Créez un nouveau filtre
+        const filter = new Filter();
+
+        // Ajoutez des mots supplémentaires à la liste des gros mots
+        const words = require("./extra-words.json");
+        filter.addWords(...words);
+
+        // Fonction pour nettoyer les gros mots du commentaire
+        function cleanComment(comment) {
+            return filter.clean(comment);
+        }
+
         // Fonction pour vérifier si le titre du commentaire est une chaîne de caractères
         function validateForm() {
             var titre_commentaire = document.forms["commsForm"]["titre_commentaire"].value;
-            var regex = /^[a-zA-Z\s]*$/; // Expression régulière pour les chaînes de caractères alphabétiques
+            var commentaire = document.forms["commsForm"]["commentaire"].value;
 
+            // Nettoyer le commentaire des gros mots
+            var clean_commentaire = cleanComment(commentaire);
+
+            // Vérifiez si le titre du commentaire est une chaîne de caractères
+            var regex = /^[a-zA-Z\s]*$/; // Expression régulière pour les chaînes de caractères alphabétiques
             if (!regex.test(titre_commentaire)) {
                 alert("Le titre du commentaire ne doit contenir que des lettres.");
                 return false;
             }
+
+            // Mettre à jour la valeur du champ de commentaire avec la version nettoyée
+            document.forms["commsForm"]["commentaire"].value = clean_commentaire;
 
             return true; // Soumettre le formulaire si les champs sont valides
         }
