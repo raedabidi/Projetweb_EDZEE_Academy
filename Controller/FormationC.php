@@ -21,11 +21,11 @@
 		}
 
 
-		function SupprimerFormation($IDF){
-			$sql="DELETE FROM formation WHERE IDF=:IDF";
+		function SupprimerFormation($Titre){
+			$sql="DELETE FROM formation WHERE Titre=:Titre";
 			$db = config::getConnexion();
 			$req=$db->prepare($sql);
-			$req->bindValue(':IDF', $IDF);   
+			$req->bindValue(':Titre', $Titre);   
 			try{
 				$req->execute();
 			}
@@ -107,6 +107,12 @@
 				echo 'Erreur: ' . $e->getMessage();
 				return array(); // Retourne un tableau vide en cas d'erreur
 			}
+		}
+		public function getAllTitles() {
+			
+			$existingTitles = array("Titre existant 1", "Titre existant 2", "Titre existant 3");
+	
+			return $existingTitles;
 		}
 
         } 

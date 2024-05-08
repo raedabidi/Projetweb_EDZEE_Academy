@@ -67,12 +67,7 @@ if ($tri == 'prix_croissant') {
         <div class="row">
             <div class="col">
                 <div class="table-responsive">
-                    <!-- Formulaire de recherche -->
-                    <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                        <label for="recherche">Recherche :</label>
-                        <input type="text" name="recherche" id="recherche" value="<?php echo htmlentities($recherche); ?>">
-                        <input type="submit" value="Rechercher">
-                    </form>
+                  
 
                     <?php if (empty($tab) && !empty($recherche)) : ?>
                         <p>Aucun titre ne correspond à votre recherche.</p>
@@ -80,7 +75,12 @@ if ($tri == 'prix_croissant') {
 
                     <h1>Liste des Formations</h1>
                     <h2><a href="ajouter.php">Ajouter Formation</a></h2>
-
+                 <!-- Formulaire de recherche -->
+                  <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <label for="recherche">Recherche :</label>
+                        <input type="text" name="recherche" id="recherche" value="<?php echo htmlentities($recherche); ?>">
+                        <input type="submit" value="Rechercher">
+                    </form>
                     <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <label for="tri">Trier par :</label>
                         <select name="tri" id="tri">

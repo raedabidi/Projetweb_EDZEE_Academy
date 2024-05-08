@@ -32,7 +32,7 @@ if (
         $RessourcesC->ModifierRessource($fressource, $IDR);
 
         // Rediriger vers index.php après la mise à jour réussie
-        header('Location: index.php');
+        header('Location: afficherRessource.php');
         exit();
     } else {
         $error = "Informations manquantes";

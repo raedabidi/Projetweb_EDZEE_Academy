@@ -6,10 +6,10 @@ $errorMessage = "";
 $successMessage = "";
 
 // Supprimer la formation
-if(isset($_GET['IDF'])) {
+if(isset($_GET['Titre'])) {
     $FormationC = new FormationC();
-    $IDF = $_GET['IDF'];
-    $FormationC->SupprimerFormation($IDF);
+    $Titre = $_GET['Titre'];
+    $FormationC->SupprimerFormation($Titre);
     $successMessage = "Formation supprimée avec succès";
 }
 
@@ -38,8 +38,8 @@ if(isset($_GET['IDF'])) {
         <form method="get" class="form">
             <div class="row mb-5">
                 <div class="col-sm-6">
-                    <label class="col-form-label">ID de la formation à supprimer:</label>
-                    <input type="text" class="form-control" name="IDF" placeholder="Entrez l'ID de la formation à supprimer">
+                    <label class="col-form-label">Titre de la formation à supprimer:</label>
+                    <input type="text" class="form-control" name="Titre" placeholder="Entrez le titre de la formation à supprimer">
                 </div>
                 <div class="col-sm-6 d-grid">
                     <button type="submit" class="btn btn-danger">Supprimer</button>
