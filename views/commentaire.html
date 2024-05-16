@@ -10,9 +10,9 @@
 <body>
     
     <div class="container">
-        <div class="head"><h1>Post a Comment</h1></div>
+        <div class="head"><h1>Laissez un Commentaire</h1></div>
         <div><span id="comment">0</span> Comments</div>
-        <div class="text"><p>We are happy to hear from you</p></div>
+        <div class="text"><p>Donnez votre avis !</p></div>
         <div class="comments"></div>
         <div class="commentbox">
             <img src="../views/images/user.jpg" alt="">
@@ -29,8 +29,6 @@
                         </div>
                     </div>
                 </div>
-                <p class="policy">This site is procted by reCAPTCHA and the Google <a href="">privacy policy</a> and <a href="">Terms of Service</a> apply.</p>
-            </div>
         </div>
     </div>
 
@@ -50,7 +48,7 @@ const userName = document.querySelector(".user");
 const notify = document.querySelector(".notifyinput");
 
 // Liste de mots à censurer
-const badWords = ["dumb", "stupid", "fuck"];
+const badWords = ["fuck", "stupid","shit", "asshole", "bastard", "bitch", "cunt", "motherfucker", "dick", "cock", "pussy", "merde", "con", "connard", "salope", "pute", "enculé", "bâtard", "foutre", "nique", "cul", "bite"];
 
 // Fonction pour censurer les gros mots dans un commentaire
 function censorBadWords(comment) {
